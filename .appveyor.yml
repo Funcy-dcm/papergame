@@ -1,0 +1,83 @@
+version: build{build}-{branch}
+image: Visual Studio 2019
+
+build:
+  parallel: true
+  verbosity: detailed
+
+environment:
+  global:
+    ARCH: x86
+    TOOLSDIR: C:\Qt\Tools\QtCreator
+  matrix:
+  - PORTABLE: "true"
+    QTDIR: C:\Qt\5.15.0\msvc2019
+  - ARCH: x86
+    QTDIR: C:\Qt\5.15.0\msvc2019
+  - ARCH: x64
+    QTDIR: C:\Qt\5.15.0\msvc2019_64
+
+configuration:
+  - release
+
+install:
+  - if "%APPVEYOR_REPO_TAG%" == "true" (set APPVEYOR_BUILD_VERSION=%APPVEYOR_REPO_TAG_NAME%)
+  - set CPU=32
+  - if "%ARCH%" == "x64" (set CPU=64)
+  - set OPENSSL_DIR="C:\OpenSSL-Win%CPU%"
+  - set ICU_DIR_NAME=icu4c-54_1-Win%CPU%-msvc10
+  - set ICU_DOWNLOAD_URL="http://download.icu-project.org/files/icu4c/54.1/%ICU_DIR_NAME%.zip"
+  - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" %ARCH%
+  - set PATH=%QTDIR%\bin;%TOOLSDIR%\bin;%OPENSSL_DIR%\bin;%CD%\bin;%PATH%
+
+build_script:
+  - call %APPVEYOR_BUILD_FOLDER%\tools\build\appveyor-build.bat
+
+artifacts:
+  - path: build\PaperGame-%APPVEYOR_BUILD_VERSION%-portable.*
+    name: PaperGame-portable
+  - path: build\PaperGame-%APPVEYOR_BUILD_VERSION%-setup-x86.*
+    name: PaperGame-setup
+
+#deploy:
+#- provider: BinTray
+#  username: funcy-dcm
+#  api_key:
+#    secure: pHgpq9FPGqcuEERtIZJAEvkEXUzl2OwVmcw4j8z5ndngGXBGRiRXzbBBTSAFef5n
+#  subject: papergame
+#  repo: papergame2
+#  package: Windows-installer
+#  version: $(APPVEYOR_BUILD_VERSION)
+#  publish: true
+#  override: true
+#  artifact: PaperGame-setup
+#  on:
+#    appveyor_repo_tag: true
+#
+#- provider: BinTray
+#  username: funcy-dcm
+#  api_key:
+#    secure: pHgpq9FPGqcuEERtIZJAEvkEXUzl2OwVmcw4j8z5ndngGXBGRiRXzbBBTSAFef5n
+#  subject: papergame
+#  repo: papergame2
+#  package: Windows-portable
+#  version: $(APPVEYOR_BUILD_VERSION)
+#  publish: true
+#  override: true
+#  artifact: PaperGame-portable
+#  on:
+#    appveyor_repo_tag: true
+#
+#- provider: BinTray
+#  username: funcy-dcm
+#  api_key:
+#    secure: pHgpq9FPGqcuEERtIZJAEvkEXUzl2OwVmcw4j8z5ndngGXBGRiRXzbBBTSAFef5n
+#  subject: papergame
+#  repo: papergame2-development
+#  package: Windows-portable-dev
+#  version: $(APPVEYOR_BUILD_VERSION)
+#  publish: true
+#  override: true
+#  artifact: PaperGame-portable
+#  on:
+#    branch: master

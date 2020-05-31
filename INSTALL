@@ -1,0 +1,45 @@
+General
+================================================================================
+
+PaperGame requires Qt version 5.15 or higher
+Required Qt libraries:
+  QtQml
+  QtQuick
+
+For building with system qtsingleapplication add SYSTEMQTSA=true to qmake command
+
+Microsoft Windows
+--------------------------------------------------------------------------------
+Requires Microsoft Visual C++ Compiler
+Build Steps:
+  call vcvarsall.bat x64
+  mkdir build && cd build
+  qmake CONFIG+=release -spec win32-msvc ..\papergame.pro
+  jom -j3
+  windeployqt bin --qmldir=..\resources\qml\+webview --no-compiler-runtime
+
+Instead of -j3 make option you can use -j<number of your CPU cores + 1>
+
+Linux
+--------------------------------------------------------------------------------
+Build Steps:
+  mkdir build && cd build
+  qmake CONFIG+=release PREFIX=/usr ../papergame.pro
+  make -j3
+  make install
+
+Instead of -j3 make option you can use -j<number of your CPU cores + 1>.
+For making debug build use CONFIG+=debug instead of CONFIG+=release.
+By default qmake uses gcc, for using clang you need to alter qmake command:
+  qmake QMAKE_CC=clang QMAKE_CXX=clang++ QMAKE_LINK=clang++ QMAKE_LINK_C=clang CONFIG+=release PREFIX=/usr ../papergame.pro
+
+Mac OS X
+--------------------------------------------------------------------------------
+Build Steps:
+  mkdir build && cd build
+  qmake -recursive -spec macx-g++ CONFIG+=release CONFIG+=x86_64 ../papergame.pro
+  make -j3
+  rm -r -f ../resources\qml\+mobile
+  macdeployqt bin/PaperGame.app/ -dmg -qmldir=../resources/qml
+
+Instead of -j3 make option you can use -j<number of your CPU cores + 1>

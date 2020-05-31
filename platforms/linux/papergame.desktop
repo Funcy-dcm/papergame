@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=PaperGame
+Exec=papergame
+Icon=papergame
+Type=Application
+GenericName=Board game
+Comment=PaperGame is a open-source cross-platform board game written in Qt/C++/QML
+Terminal=false
+Categories=Qt;Game;
+X-DBUS-StartupType=none
