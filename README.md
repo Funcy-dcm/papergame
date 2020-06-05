@@ -1,5 +1,6 @@
 PaperGame
 ================================================================================
+[![Build status](https://ci.appveyor.com/api/projects/status/wtf2k76gg4ekgku5?svg=true)](https://ci.appveyor.com/project/Funcy-dcm/papergame)
 
 PaperGame is a open-source cross-platform board game written in Qt/C++/QML
 
