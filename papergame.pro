@@ -42,7 +42,7 @@ DEFINES += APP_VERSION=\\\"$$APP_VERSION\\\"
 DEFINES += APP_REVISION=\\\"$$APP_REVISION\\\"
 DEFINES += APP_DATE=\\\"$$APP_DATE\\\"
 
-equals(NO_LOG_FILE, false) {
+equals(NO_LOG_FILE, true) {
     DEFINES += NO_LOG_FILE
 }
 equals(SHOW_GAME, true) {
