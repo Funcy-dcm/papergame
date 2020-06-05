@@ -3,7 +3,7 @@ setlocal
 
 echo "BUILD %APPVEYOR_BUILD_VERSION%_%CONFIGURATION%_%ARCH%_%APPVEYOR_REPO_TAG_NAME%"
 mkdir build && cd build
-qmake CONFIG+=%CONFIGURATION% ..\papergame.pro
+qmake CONFIG+=%CONFIGURATION% ..\papergame.pro SHOW_GAME=true
 call jom
 windeployqt bin --qmldir=..\resources\qml --no-compiler-runtime
 cp c:\Windows\SysWOW64\msvcp140.dll bin
