@@ -6,9 +6,10 @@ mkdir build && cd build
 qmake CONFIG+=%CONFIGURATION% ..\papergame.pro SHOW_GAME=true
 call jom
 windeployqt bin --qmldir=..\resources\qml --no-compiler-runtime
-cp ../resources/data/rules_en.pdf bin/data
-cp ../resources/data/rules_ru.pdf bin/data
-cp ../resources/data/sheet.pdf bin/data
+mkdir data
+cp ../resources/data/rules_en.pdf bin/data/
+cp ../resources/data/rules_ru.pdf bin/data/
+cp ../resources/data/sheet.pdf bin/data/
 cp c:\Windows\SysWOW64\msvcp140.dll bin
 cp c:\Windows\SysWOW64\vccorlib140.dll bin
 cp c:\Windows\SysWOW64\vcruntime140.dll bin
