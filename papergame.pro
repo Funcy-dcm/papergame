@@ -1,8 +1,8 @@
 lessThan(QT_MAJOR_VERSION, 5) {
-    error("papergame: At least Qt "5.15.0" is required!")
+    error("papergame: At least Qt "5.13.0" is required!")
 }
-isEqual(QT_MAJOR_VERSION, 5):lessThan(QT_MINOR_VERSION, 15) {
-   error("papergame: At least Qt "5.15.0" is required!")
+isEqual(QT_MAJOR_VERSION, 5):lessThan(QT_MINOR_VERSION, 13) {
+   error("papergame: At least Qt "5.13.0" is required!")
 }
 
 APP_REVISION = 0
