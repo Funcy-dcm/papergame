@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
+import QtGraphicalEffects 1.0
 
 GridLayout {
     property var expertMode: false
@@ -26,59 +27,11 @@ GridLayout {
         Layout.rowSpan: 3
     }
 
-    Rectangle {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        Layout.preferredWidth: cardWidth
-        Layout.preferredHeight: cardHeight
-        color: "transparent"
-        Image {
-            id: imgTarget1
-
-            anchors.fill: parent
-            fillMode: Image.PreserveAspectFit
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                flipOverTargets(0)
-            }
-        }
-    }
-    Rectangle {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        Layout.preferredWidth: cardWidth
-        Layout.preferredHeight: cardHeight
-        color: "transparent"
-        Image {
-            id: imgTarget2
-            anchors.fill: parent
-            fillMode: Image.PreserveAspectFit
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                flipOverTargets(1)
-            }
-        }
-    }
-    Rectangle {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        Layout.preferredWidth: cardWidth
-        Layout.preferredHeight: cardHeight
-        color: "transparent"
-        Image {
-            id: imgTarget3
-            anchors.fill: parent
-            fillMode: Image.PreserveAspectFit
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                flipOverTargets(2)
-            }
+    Repeater {
+        id: targetItems
+        model: 3
+        TargetItem {
+            onFlipOverTarget: flipOverTargets(index)
         }
     }
 
@@ -88,116 +41,33 @@ GridLayout {
         Layout.rowSpan: 3
     }
 
-    Rectangle {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        Layout.preferredWidth: cardWidth
-        Layout.preferredHeight: cardHeight
-        color: "transparent"
-        Image {
-            id: imgCardBottom1
-            anchors.fill: parent
-            fillMode: Image.PreserveAspectFit
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: returnCards()
-        }
-    }
-    Rectangle {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        Layout.preferredWidth: cardWidth
-        Layout.preferredHeight: cardHeight
-        color: "transparent"
-        Image {
-            id: imgCardBottom2
-            anchors.fill: parent
-            fillMode: Image.PreserveAspectFit
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: returnCards()
-        }
-    }
-    Rectangle {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        Layout.preferredWidth: cardWidth
-        Layout.preferredHeight: cardHeight
-        color: "transparent"
-        Image {
-            id: imgCardBottom3
-            anchors.fill: parent
-            fillMode: Image.PreserveAspectFit
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: returnCards()
+    Repeater {
+        id: cardBottomItems
+        model: 3
+        CardItem {
+            onCardClicked: returnCards()
         }
     }
 
-    Rectangle {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        Layout.preferredWidth: cardWidth
-        Layout.preferredHeight: cardHeight
-        color: "transparent"
-        Image {
-            id: imgCardTop1
-            anchors.fill: parent
-            fillMode: Image.PreserveAspectFit
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: flipOverCards()
-        }
-    }
-    Rectangle {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        Layout.preferredWidth: cardWidth
-        Layout.preferredHeight: cardHeight
-        color: "transparent"
-        Image {
-            id: imgCardTop2
-            anchors.fill: parent
-            fillMode: Image.PreserveAspectFit
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: flipOverCards()
-        }
-    }
-    Rectangle {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        Layout.preferredWidth: cardWidth
-        Layout.preferredHeight: cardHeight
-        color: "transparent"
-        Image {
-            id: imgCardTop3
-            anchors.fill: parent
-            fillMode: Image.PreserveAspectFit
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: flipOverCards()
+    Repeater {
+        id: cardTopItems
+        model: 3
+        CardItem {
+            onCardClicked: flipOverCards()
         }
     }
 
     Component.onCompleted: {
-        imgTargetArray[0] = imgTarget1
-        imgTargetArray[1] = imgTarget2;
-        imgTargetArray[2] = imgTarget3;
+        var i;
+        for (i = 0; i < targetItems.count; ++i) {
+            imgTargetArray[i] = targetItems.itemAt(i).image;
+        }
         initRandomTargetsArray();
 
-        imgCardBottomArray[0] = imgCardBottom1;
-        imgCardBottomArray[1] = imgCardBottom2;
-        imgCardBottomArray[2] = imgCardBottom3;
-        imgCardTopArray[0] = imgCardTop1;
-        imgCardTopArray[1] = imgCardTop2;
-        imgCardTopArray[2] = imgCardTop3;
+        for (i = 0; i < cardBottomItems.count; ++i) {
+            imgCardBottomArray[i] = cardBottomItems.itemAt(i).image;
+            imgCardTopArray[i] = cardTopItems.itemAt(i).image;
+        }
         initRandomCardsArray();
     }
 

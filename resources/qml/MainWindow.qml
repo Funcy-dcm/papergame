@@ -38,6 +38,8 @@ ApplicationWindow {
 
     Material.accent: Material.Orange
 
+    readonly property int initPage: 1
+
     Action {
         id: fullScreenAction
         icon.source: "qrc:///images/fullScreen.png"
@@ -71,8 +73,9 @@ ApplicationWindow {
 
     Item {
         id: mainItem
-        anchors.margins: 10
         anchors.fill: parent
+        anchors.topMargin: 10
+        anchors.bottomMargin: 10
 
         ColumnLayout {
             anchors.fill: parent
@@ -82,28 +85,22 @@ ApplicationWindow {
                 id: swipeView
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                currentIndex: 1
+                currentIndex: initPage
 
                 Item {
                     id: sheetLayout
                 }
-                //                SheetLayout {
-                //                    id: sheetLayout
-                //                }
+//                SheetPage {
+//                    id: sheetLayout
+//                }
 
-                CardsLayout {
+                CardsPage {
                     id: cardsLayout
                     expertMode: expertModeAction.checked
                 }
 
-                ColumnLayout {
-                    anchors.margins: 10
-                    Image {
-                        Layout.fillHeight: true
-                        Layout.alignment: Qt.AlignHCenter
-                        fillMode: Image.PreserveAspectFit
-                        source: "qrc:///images/help.png";
-                    }
+                HelpPage {
+
                 }
 
                 onCurrentIndexChanged: {
@@ -112,7 +109,6 @@ ApplicationWindow {
                         helpAction.text = qsTr("Cards");
                     else
                         helpAction.text = qsTr("Help");
-                    console.log("test 1: " + swipeView.currentIndex + pageIndicator.currentIndex)
                 }
             }
 
@@ -120,11 +116,10 @@ ApplicationWindow {
                 id: pageIndicator
                 Layout.alignment: Qt.AlignHCenter
                 interactive: true
-                currentIndex: 1
+                currentIndex: initPage
                 count: swipeView.count
                 onCurrentIndexChanged: {
                     swipeView.currentIndex = pageIndicator.currentIndex;
-                    console.log("test 2: " + swipeView.currentIndex + pageIndicator.currentIndex)
                 }
             }
 
@@ -147,7 +142,6 @@ ApplicationWindow {
                 onClicked: mainApp.setLanguage("en")
             }
             ToolButton {
-                anchors.margins: 0
                 focusPolicy: Qt.NoFocus
                 icon.color: "transparent"
                 icon.source: "qrc:///images/languages/flag_russia.png"
@@ -160,6 +154,7 @@ ApplicationWindow {
             focusPolicy: Qt.NoFocus
             anchors.right: parent.right
             anchors.top: parent.top
+            anchors.rightMargin: 10
             onClicked: menu.open()
 
             Menu {
@@ -202,7 +197,7 @@ ApplicationWindow {
                 MenuItem {
                     id: expertModeAction
                     checkable: true
-                    checked: mainApp.getExpertMode();
+                    checked: mainApp.getExpertMode()
                     onClicked: {
                         mainApp.setExpertMode(checked);
                         cardsLayout.initRandomTargetsArray();
