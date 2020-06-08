@@ -68,6 +68,7 @@ Application::Application(int &argc, char **argv) :
 
   loadTranslation();
   initQmlFileSelector();
+  initCards();
 
   QQuickStyle::setStyle("Material");
   QQuickWindow::setTextRenderType(QQuickWindow::NativeTextRendering);
@@ -261,14 +262,8 @@ void Application::initQmlFileSelector()
   qfs->setExtraSelectors(selectors);
 }
 
-bool Application::getExpertMode()
+void Application::initCards()
 {
-  Settings settings;
-  return settings.value("ExpertMode", false).toBool();
-}
-
-void Application::setExpertMode(bool mode)
-{
-  Settings settings;
-  settings.setValue("ExpertMode", mode);
+  m_cards = new Cards(this);
+  m_qmlEngine.rootContext()->setContextProperty("cards", m_cards);
 }

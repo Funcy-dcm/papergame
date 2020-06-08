@@ -6,7 +6,6 @@
         <file>qml/SheetPage.qml</file>
         <file>qml/NameDialog.qml</file>
         <file>qml/StyleButton.qml</file>
-        <file>qml/TargetItem.qml</file>
         <file>qml/CardItem.qml</file>
         <file>qml/HelpPage.qml</file>
     </qresource>

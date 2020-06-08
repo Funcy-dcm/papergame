@@ -60,6 +60,7 @@ HEADERS += \
     src/application/logfile.h \
     src/application/settings.h \
     src/common/common.h \
+    src/game/cards.h \
 
 SOURCES += \
     src/application/application.cpp \
@@ -67,11 +68,13 @@ SOURCES += \
     src/main.cpp \
     src/application/logfile.cpp \
     src/application/settings.cpp \
+    src/game/cards.cpp \
 
 INCLUDEPATH += \
     $$PWD/src \
     $$PWD/src/application \
     $$PWD/src/common \
+    $$PWD/src/game \
 
 RESOURCES += \
     resources/qml.qrc \

@@ -60,15 +60,25 @@ ApplicationWindow {
     }
     Action {
         shortcut: "1"
-        onTriggered: cardsLayout.flipOverTargets(0)
+        onTriggered: cards.flipOverTargets(0)
     }
     Action {
         shortcut: "2"
-        onTriggered: cardsLayout.flipOverTargets(1)
+        onTriggered: cards.flipOverTargets(1)
     }
     Action {
         shortcut: "3"
-        onTriggered: cardsLayout.flipOverTargets(2)
+        onTriggered: cards.flipOverTargets(2)
+    }
+    Action {
+        id: returnCardsAction
+        shortcut: "Backspace"
+        onTriggered: cards.returnCards()
+    }
+    Action {
+        id: flipOverCardsAction
+        shortcut: "Space"
+        onTriggered: cards.flipOverCards()
     }
 
     Item {
@@ -90,13 +100,12 @@ ApplicationWindow {
                 Item {
                     id: sheetLayout
                 }
-//                SheetPage {
-//                    id: sheetLayout
-//                }
+                //                SheetPage {
+                //                    id: sheetLayout
+                //                }
 
                 CardsPage {
-                    id: cardsLayout
-                    expertMode: expertModeAction.checked
+
                 }
 
                 HelpPage {
@@ -173,6 +182,24 @@ ApplicationWindow {
 
                 MenuSeparator { }
 
+                Action {
+                    id: newGameAction
+                    shortcut: "ctrl+n"
+                    onTriggered: cards.newGame()
+                }
+                Action {
+                    id: mixTargetsAction
+                    shortcut: "ctrl+t"
+                    onTriggered: cards.randomTargets()
+                }
+                Action {
+                    id: mixCardsAction
+                    shortcut: "ctrl+c"
+                    onTriggered: cards.randomCards()
+                }
+
+                MenuSeparator { }
+
                 MenuItem {
                     id: rulesAction
                     onClicked: Qt.openUrlExternally("file:///" +
@@ -184,37 +211,14 @@ ApplicationWindow {
                     onClicked: Qt.openUrlExternally("file:///" +
                                                     mainApp.dataDirPath() + "/sheet.pdf")
                 }
-                Action {
-                    id: mixTargetsAction
-                    shortcut: "ctrl+t"
-                    onTriggered: cardsLayout.initRandomTargetsArray()
-                }
-                Action {
-                    id: mixCardsAction
-                    shortcut: "ctrl+c"
-                    onTriggered: cardsLayout.initRandomCardsArray()
-                }
                 MenuItem {
                     id: expertModeAction
                     checkable: true
-                    checked: mainApp.getExpertMode()
+                    checked: cards.getExpertMode()
                     onClicked: {
-                        mainApp.setExpertMode(checked);
-                        cardsLayout.initRandomTargetsArray();
+                        cards.setExpertMode(checked);
+                        cards.newGame();
                     }
-                }
-
-                MenuSeparator { }
-
-                Action {
-                    id: returnCardsAction
-                    shortcut: "Backspace"
-                    onTriggered: cardsLayout.returnCards()
-                }
-                Action {
-                    id: flipOverCardsAction
-                    shortcut: "Space"
-                    onTriggered: cardsLayout.flipOverCards()
                 }
 
                 MenuSeparator { }
@@ -230,10 +234,10 @@ ApplicationWindow {
         ToolButton {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
+            focusPolicy: Qt.NoFocus
             icon.color: "transparent"
             display: AbstractButton.IconOnly
             action: fullScreenAction
-            focusPolicy: Qt.NoFocus
         }
     }
 
@@ -260,6 +264,7 @@ ApplicationWindow {
         helpAction.text = qsTr("Help");
         rulesAction.text = qsTr("Rules...");
         sheetAction.text = qsTr("Sheet...");
+        newGameAction.text = qsTr("New game");
         mixTargetsAction.text = qsTr("Mix targets");
         mixCardsAction.text = qsTr("Mix cards");
         expertModeAction.text = qsTr("Expert mode");

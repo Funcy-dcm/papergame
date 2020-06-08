@@ -27,6 +27,7 @@
 
 #include "common.h"
 #include "settings.h"
+#include "cards.h"
 
 #define mainApp Application::getInstance()
 
@@ -56,8 +57,6 @@ public:
     QQmlApplicationEngine *qmlEngine() { return &m_qmlEngine; }
     Q_INVOKABLE void setLanguage(const QString &language);
     Q_INVOKABLE QString getLanguage() { return m_language; }
-    Q_INVOKABLE bool getExpertMode();
-    Q_INVOKABLE void setExpertMode(bool mode);
 
 signals:
     void showMainWindow();
@@ -80,6 +79,7 @@ private:
     void loadTranslation();
     QString getDefaultLanguage();
     void initQmlFileSelector();
+    void initCards();
 
     bool m_isPortable;
     bool m_isPortableAppsCom;
@@ -100,6 +100,8 @@ private:
     QTranslator *m_qtTranslator;
     QTranslator *m_appTranslator;
     QString m_language;
+
+    Cards *m_cards;
 
 };
 
