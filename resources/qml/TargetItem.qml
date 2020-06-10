@@ -2,7 +2,7 @@ import QtQuick 2.12
 import QtGraphicalEffects 1.0
 
 Flipable {
-    id: container
+    id: root
 
     property alias frontSource: frontImage.imageSource
     property alias backSource: backImage.imageSource
@@ -10,13 +10,13 @@ Flipable {
 
     front: CardItem {
         id: frontImage
-        width: container.width
-        height: container.height
+        width: root.width
+        height: root.height
     }
     back: CardItem {
         id: backImage
-        width: container.width
-        height: container.height
+        width: root.width
+        height: root.height
     }
 
     state: "front"
@@ -24,12 +24,12 @@ Flipable {
     MouseArea { anchors.fill: parent; onClicked: flipped() }
 
     transform: Rotation {
-        id: rotation; origin.x: container.width / 2; origin.y: container.height / 2
+        id: rotation; origin.x: root.width / 2; origin.y: root.height / 2
         axis.x: 0; axis.y: 1; axis.z: 0
     }
 
     states: State {
-        name: "back"; when: container.isFlipped
+        name: "back"; when: root.isFlipped
         PropertyChanges { target: rotation; angle: 180 }
     }
 
@@ -37,14 +37,13 @@ Flipable {
         ParallelAnimation {
             NumberAnimation { target: rotation; properties: "angle"; duration: 600 }
             SequentialAnimation {
-                NumberAnimation { target: container; property: "scale"; to: 0.75; duration: 300 }
-                NumberAnimation { target: container; property: "scale"; to: 1.0; duration: 300 }
+                NumberAnimation { target: root; property: "scale"; to: 0.75; duration: 300 }
+                NumberAnimation { target: root; property: "scale"; to: 1.0; duration: 300 }
             }
         }
     }
 
     function flipped() {
-        container.isFlipped = !container.isFlipped;
+        root.isFlipped = !root.isFlipped;
     }
-
 }

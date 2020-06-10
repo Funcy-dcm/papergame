@@ -105,7 +105,7 @@ ApplicationWindow {
                 //                }
 
                 CardsPage {
-
+                    id: cardPage
                 }
 
                 HelpPage {

@@ -99,7 +99,7 @@ void Cards::randomTargets()
     if (randomNumber > ext)
       start = 5;
     m_targetsArray.append(start + randomNumber);
-    qCritical() << "target 0: " << m_targetsArray[0];
+    qCritical() << "target 0: " << m_targetsArray[0] << randomNumber;
     emit setImageTarget(0, QString("qrc:///images/targets/targetTop%1.png").arg(m_targetsArray[0]),
         QString("qrc:///images/targets/targetBottom%1.png").arg(m_targetsArray[0]));
 
@@ -108,7 +108,7 @@ void Cards::randomTargets()
     if (randomNumber > ext)
       start = 11;
     m_targetsArray.append(start + randomNumber);
-    qCritical() << "target 1: " << m_targetsArray[1];
+    qCritical() << "target 1: " << m_targetsArray[1] << randomNumber;
     emit setImageTarget(1, QString("qrc:///images/targets/targetTop%1.png").arg(m_targetsArray[1]),
         QString("qrc:///images/targets/targetBottom%1.png").arg(m_targetsArray[1]));
 
@@ -116,14 +116,14 @@ void Cards::randomTargets()
     randomNumber = QRandomGenerator::global()->bounded(1, max+1);
     start = 22;
     m_targetsArray.append(start + randomNumber);
-    qCritical() << "target 2: " << m_targetsArray[2];
+    qCritical() << "target 2: " << m_targetsArray[2] << randomNumber;
     emit setImageTarget(2, QString("qrc:///images/targets/targetTop%1.png").arg(m_targetsArray[2]),
         QString("qrc:///images/targets/targetBottom%1.png").arg(m_targetsArray[2]));
   } else {
     for (int i = 0; i < 3; i++) {
       int randomNumber = QRandomGenerator::global()->bounded(1, m_targetsMax+1);
       m_targetsArray.append(10 + i*m_targetsMax + randomNumber);
-      qCritical() << "target" << i << ":" << m_targetsArray[i];
+      qCritical() << "target" << i << ":" << m_targetsArray[i] << randomNumber;
       emit setImageTarget(i, QString("qrc:///images/targets/targetTop%1.png").arg(m_targetsArray[i]),
                           QString("qrc:///images/targets/targetBottom%1.png").arg(m_targetsArray[i]));
     }

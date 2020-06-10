@@ -23,7 +23,7 @@ Item {
                 id: targetItems
                 model: 3
                 TargetItem {
-                    height: (parent.height-2*columnSpacing)/3
+                    height: (root.height-2*columnSpacing)/3
                     width: height/ratio
                 }
             }
@@ -79,6 +79,7 @@ Item {
         onSetImageCardTop: cardTopItems.itemAt(num).imageSource = path
         onSetImageCardBottom: cardBottomItems.itemAt(num).imageSource = path
         onSetImageTarget: {
+            targetItems.itemAt(num).isFlipped = false;
             targetItems.itemAt(num).frontSource = frontPath;
             targetItems.itemAt(num).backSource = backPath;
         }
