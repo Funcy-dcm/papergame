@@ -8,5 +8,6 @@
         <file>qml/StyleButton.qml</file>
         <file>qml/CardItem.qml</file>
         <file>qml/HelpPage.qml</file>
+        <file>qml/TargetItem.qml</file>
     </qresource>
 </RCC>

@@ -8,6 +8,7 @@ Item {
     readonly property int cardHeight: 340
     readonly property int columnSpacing: 20
     property var ratio: cardHeight/cardWidth
+    property alias targets: targetItems
 
     RowLayout {
         anchors.fill: parent
@@ -21,10 +22,9 @@ Item {
             Repeater {
                 id: targetItems
                 model: 3
-                CardItem {
+                TargetItem {
                     height: (parent.height-2*columnSpacing)/3
                     width: height/ratio
-                    onCardClicked: cards.flipOverTargets(index)
                 }
             }
         }
@@ -78,7 +78,10 @@ Item {
         target: cards
         onSetImageCardTop: cardTopItems.itemAt(num).imageSource = path
         onSetImageCardBottom: cardBottomItems.itemAt(num).imageSource = path
-        onSetImageTarget: targetItems.itemAt(num).imageSource = path
+        onSetImageTarget: {
+            targetItems.itemAt(num).frontSource = frontPath;
+            targetItems.itemAt(num).backSource = backPath;
+        }
     }
 }
 

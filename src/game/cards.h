@@ -19,12 +19,11 @@ public:
   Q_INVOKABLE void flipOverCards();
   Q_INVOKABLE void returnCards();
   Q_INVOKABLE void randomTargets();
-  Q_INVOKABLE void flipOverTargets(int num);
 
 signals:
   void setImageCardTop(int num, const QString &path);
   void setImageCardBottom(int num, const QString &path);
-  void setImageTarget(int num, const QString &path);
+  void setImageTarget(int num, const QString &frontPath, const QString &backPath);
 
 private:
   bool m_expertMode;

@@ -60,15 +60,15 @@ ApplicationWindow {
     }
     Action {
         shortcut: "1"
-        onTriggered: cards.flipOverTargets(0)
+        onTriggered: cardPage.targets.itemAt(0).flipped()
     }
     Action {
         shortcut: "2"
-        onTriggered: cards.flipOverTargets(1)
+        onTriggered: cardPage.targets.itemAt(1).flipped()
     }
     Action {
         shortcut: "3"
-        onTriggered: cards.flipOverTargets(2)
+        onTriggered: cardPage.targets.itemAt(2).flipped()
     }
     Action {
         id: returnCardsAction

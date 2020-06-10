@@ -100,7 +100,8 @@ void Cards::randomTargets()
       start = 5;
     m_targetsArray.append(start + randomNumber);
     qCritical() << "target 0: " << m_targetsArray[0];
-    emit setImageTarget(0, QString("qrc:///images/targets/targetTop%1.png").arg(m_targetsArray[0]));
+    emit setImageTarget(0, QString("qrc:///images/targets/targetTop%1.png").arg(m_targetsArray[0]),
+        QString("qrc:///images/targets/targetBottom%1.png").arg(m_targetsArray[0]));
 
     randomNumber = QRandomGenerator::global()->bounded(1, max+1);
     start = 5;
@@ -108,29 +109,23 @@ void Cards::randomTargets()
       start = 11;
     m_targetsArray.append(start + randomNumber);
     qCritical() << "target 1: " << m_targetsArray[1];
-    emit setImageTarget(1, QString("qrc:///images/targets/targetTop%1.png").arg(m_targetsArray[1]));
+    emit setImageTarget(1, QString("qrc:///images/targets/targetTop%1.png").arg(m_targetsArray[1]),
+        QString("qrc:///images/targets/targetBottom%1.png").arg(m_targetsArray[1]));
 
     max = m_targetsMax;
     randomNumber = QRandomGenerator::global()->bounded(1, max+1);
     start = 22;
     m_targetsArray.append(start + randomNumber);
     qCritical() << "target 2: " << m_targetsArray[2];
-    emit setImageTarget(2, QString("qrc:///images/targets/targetTop%1.png").arg(m_targetsArray[2]));
+    emit setImageTarget(2, QString("qrc:///images/targets/targetTop%1.png").arg(m_targetsArray[2]),
+        QString("qrc:///images/targets/targetBottom%1.png").arg(m_targetsArray[2]));
   } else {
     for (int i = 0; i < 3; i++) {
       int randomNumber = QRandomGenerator::global()->bounded(1, m_targetsMax+1);
       m_targetsArray.append(10 + i*m_targetsMax + randomNumber);
       qCritical() << "target" << i << ":" << m_targetsArray[i];
-      emit setImageTarget(i, QString("qrc:///images/targets/targetTop%1.png").arg(m_targetsArray[i]));
+      emit setImageTarget(i, QString("qrc:///images/targets/targetTop%1.png").arg(m_targetsArray[i]),
+                          QString("qrc:///images/targets/targetBottom%1.png").arg(m_targetsArray[i]));
     }
   }
-}
-
-void Cards::flipOverTargets(int num)
-{
-  if (isTargetTop[num])
-    emit setImageTarget(num, QString("qrc:///images/targets/targetBottom%1.png").arg(m_targetsArray[num]));
-  else
-    emit setImageTarget(num, QString("qrc:///images/targets/targetTop%1.png").arg(m_targetsArray[num]));
-  isTargetTop[num] = !isTargetTop[num];
 }

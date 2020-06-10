@@ -3,22 +3,23 @@ import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.0
 
 Item {
+    id: root
+
     property alias imageSource: image.source
 
     signal cardClicked()
 
     Image {
         id: image
-        anchors.fill: parent
         fillMode: Image.PreserveAspectFit
         visible: false
     }
     OpacityMask {
-        anchors.fill: image
+        anchors.fill: root
         source: image
         maskSource: Rectangle {
-            width: image.width
-            height: image.height
+            width: root.width
+            height: root.height
             radius: 8
             visible: false
         }
