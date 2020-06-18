@@ -21,8 +21,8 @@ public:
   Q_INVOKABLE void randomTargets();
 
 signals:
-  void setImageCardTop(int num, const QString &path);
-  void setImageCardBottom(int num, const QString &path);
+  void setImageCardTop(int num, const QString &path, bool isFlipped = true);
+  void setImageCardBottom(int num, const QString &path, bool isFlipped = false);
   void setImageTarget(int num, const QString &frontPath, const QString &backPath);
 
 private:

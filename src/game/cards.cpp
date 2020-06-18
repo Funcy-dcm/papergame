@@ -67,11 +67,11 @@ void Cards::flipOverCards()
   } else {
     for (int i = 0; i < 3; i++) {
       qDebug() << "cardBottom" << i << ":" << m_cardsArray[m_cardCount-3+i];
-      emit setImageCardBottom(i, QString("qrc:///images/cards/cardBottom%1.png").arg(m_cardsArray[m_cardCount-3+i]));
+      emit setImageCardBottom(i, QString("qrc:///images/cards/cardBottom%1.png").arg(m_cardsArray[m_cardCount-3+i]), false);
     }
     for (int i = 0; i < 3; i++) {
       qDebug() << "cardTop" << i << ":" << m_cardsArray[m_cardCount];
-      emit setImageCardTop(i, QString("qrc:///images/cards/cardTop%1.png").arg(m_cardsArray[m_cardCount]));
+      emit setImageCardTop(i, QString("qrc:///images/cards/cardTop%1.png").arg(m_cardsArray[m_cardCount]), true);
       m_cardCount++;
     }
   }
@@ -84,11 +84,11 @@ void Cards::returnCards()
 
   for (int i = 0; i < 3; i++) {
     qDebug() << "cardBottom" << i << ":" << m_cardsArray[m_cardCount-9+i];
-    emit setImageCardBottom(i, QString("qrc:///images/cards/cardBottom%1.png").arg(m_cardsArray[m_cardCount-9+i]));
+    emit setImageCardBottom(i, QString("qrc:///images/cards/cardBottom%1.png").arg(m_cardsArray[m_cardCount-9+i]), true);
   }
   for (int i = 0; i < 3; i++) {
     qDebug() << "cardTop" << i << ":" << m_cardsArray[m_cardCount-6+i];
-    emit setImageCardTop(i, QString("qrc:///images/cards/cardTop%1.png").arg(m_cardsArray[m_cardCount-6+i]));
+    emit setImageCardTop(i, QString("qrc:///images/cards/cardTop%1.png").arg(m_cardsArray[m_cardCount-6+i]), false);
   }
   m_cardCount = m_cardCount - 3;
 }

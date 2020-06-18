@@ -9,5 +9,6 @@
         <file>qml/CardItem.qml</file>
         <file>qml/HelpPage.qml</file>
         <file>qml/TargetItem.qml</file>
+        <file>qml/NewCardItem.qml</file>
     </qresource>
 </RCC>

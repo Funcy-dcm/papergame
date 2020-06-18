@@ -23,7 +23,7 @@ Item {
                 id: targetItems
                 model: 3
                 TargetItem {
-                    height: (root.height-2*columnSpacing)/3
+                    height: (root.height - 2*columnSpacing)/3
                     width: height/ratio
                 }
             }
@@ -39,8 +39,9 @@ Item {
             Repeater {
                 id: cardTopItems
                 model: 3
-                CardItem {
-                    height: (parent.height-2*columnSpacing)/3
+                NewCardItem {
+                    angle: 90
+                    height: (root.height - 2*columnSpacing)/3
                     width: height/ratio
                     onCardClicked: cards.flipOverCards()
                 }
@@ -57,8 +58,9 @@ Item {
             Repeater {
                 id: cardBottomItems
                 model: 3
-                CardItem {
-                    height: (parent.height-2*columnSpacing)/3
+                NewCardItem {
+                    angle: -90
+                    height: (root.height - 2*columnSpacing)/3
                     width: height/ratio
                     onCardClicked: cards.returnCards()
                 }
@@ -76,8 +78,12 @@ Item {
 
     Connections {
         target: cards
-        onSetImageCardTop: cardTopItems.itemAt(num).imageSource = path
-        onSetImageCardBottom: cardBottomItems.itemAt(num).imageSource = path
+        onSetImageCardTop: {
+            cardTopItems.itemAt(num).setImageSource(path, isFlipped);
+        }
+        onSetImageCardBottom: {
+            cardBottomItems.itemAt(num).setImageSource(path, isFlipped);
+        }
         onSetImageTarget: {
             targetItems.itemAt(num).isFlipped = false;
             targetItems.itemAt(num).frontSource = frontPath;
