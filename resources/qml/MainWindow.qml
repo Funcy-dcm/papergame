@@ -109,7 +109,7 @@ ApplicationWindow {
                 }
 
                 HelpPage {
-
+                    id: helpPage
                 }
 
                 onCurrentIndexChanged: {
@@ -131,12 +131,6 @@ ApplicationWindow {
                     swipeView.currentIndex = pageIndicator.currentIndex;
                 }
             }
-
-            Text {
-                id: warningText
-                Layout.alignment: Qt.AlignHCenter
-                color: "grey"
-            }
         }
 
         RowLayout {
@@ -156,6 +150,13 @@ ApplicationWindow {
                 icon.source: "qrc:///images/languages/flag_russia.png"
                 onClicked: mainApp.setLanguage("ru")
             }
+        }
+
+        Text {
+            id: warningText
+            color: "grey"
+            anchors.top: parent.bottom
+            transform: Rotation { origin.x: 0; origin.y: 0; angle: -90}
         }
 
         Button {
@@ -189,7 +190,7 @@ ApplicationWindow {
                 }
                 Action {
                     id: mixTargetsAction
-                    shortcut: "ctrl+t"
+                    shortcut: "ctrl+p"
                     onTriggered: cards.randomTargets()
                 }
                 Action {
@@ -262,14 +263,16 @@ ApplicationWindow {
         warningText.text = qsTr("All materials are provided for informational, non-commercial purposes only");
         menuButton.text = qsTr("Menu");
         helpAction.text = qsTr("Help");
-        rulesAction.text = qsTr("Rules...");
-        sheetAction.text = qsTr("Sheet...");
+        rulesAction.text = qsTr("Rulebook...");
+        sheetAction.text = qsTr("Player sheet...");
         newGameAction.text = qsTr("New game");
-        mixTargetsAction.text = qsTr("Mix targets");
-        mixCardsAction.text = qsTr("Mix cards");
+        mixTargetsAction.text = qsTr("Shuffle City Plans");
+        mixCardsAction.text = qsTr("Shuffle cards");
         expertModeAction.text = qsTr("Expert mode");
         returnCardsAction.text = qsTr("Return cards");
-        flipOverCardsAction.text = qsTr("Flip cards");
+        flipOverCardsAction.text = qsTr("Flip over cards");
         exitAction.text = qsTr("Exit");
+
+        helpPage.retranslateUi();
     }
 }
