@@ -12,8 +12,6 @@ Item {
     Image {
         id: image
         fillMode: Image.PreserveAspectFit
-        x: root.x+10
-        y: root.y+10
         width: root.width
         height: root.height
         visible: false
